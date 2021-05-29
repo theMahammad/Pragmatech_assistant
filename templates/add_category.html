@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+Kateqoriya əlavə et
+{% endblock %}
+{% block content %}
+<div class="add-category">
+<h2>Kateqoriya əlavə et</h2>
+<form action="/add_category" method="POST">
+<input type="text" class="form-control" name="category_name" placeholder="Kateqoriya adı">
+<button type="submit" class="btn btn-primary ">Əlavə et</button>
+</form>
+
+
+</form>
+</div>
+
+<div class="show-categories">
+    <h2>
+        Kateqoriya
+    </h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Adı</th>
+            <th scope="col">Əməliyyatlar</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <th scope="row">{{category.id}}</th>
+                <td>{{category.name}}</td>
+                <td>
+                    <a href="/delete_category">Sil</a>
+                    <a href="/update_category">Dəyişdir</a>
+                </td>
+              </tr>
+            {% endfor %}
+          
+        </tbody>
+      </table>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}
+Məhsul əlavə et
+{% endblock %}
+{% block content %}
+<div class="add-product">
+<h2>Məhsul əlavə et</h2>
+<form action="/add_product" method="POST">
+<input type="text" class="form-control" name="product_name" placeholder="Məhsulun adı">
+<input type="number" class="form-control" name="product_price" placeholder="Məhsulun qiyməti">
+<input type="text" class="form-control" name="product_colors" placeholder="Məhsulun rəngləri">
+
+<select name="product_category" class="form-control" id="">
+    {% for category in categories %}
+    <option value="{{category.id}}">{{category.name}}</option>
+    {% endfor %}
+    
+</select>
+<button type="submit" class="btn btn-primary ">Əlavə et</button>
+</form>
+
+
+</form>
+</div>
+
+<div class="show-products">
+    <h2>
+        Məhsullar
+    </h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Adı</th>
+            <th scope="col">Qiyməti</th>
+            <th scope="col">Kateqoriya</th>
+            <th scope="col">Rəngləri</th>
+            <th scope="col">Əməliyyatlar</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <th scope="row">{{product.id}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{Category.query.filter_by(id=product.category_id).first().name}}</td>
+                <td>
+                    {% for color in product.colors %}
+                       <a href="/colors/{{color.id}}">
+                    
+                    
+                        </a> {{color.name}}
+                        
+                       
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+         
+        </tbody>
+      </table>
+</div>
+{% endblock %}
